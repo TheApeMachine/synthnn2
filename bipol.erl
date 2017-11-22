@@ -33,9 +33,14 @@ val(L) ->
 normalize(L) ->
   A = get(0, L),
   B = get(1, L),
-  C = (100 - (A + B)) / 2,
-  Y = [A + C, B + C],
-  Y.
+
+  case A + B >= 100 of
+    true  -> throw(bipol_already_normalized);
+    false ->
+      C = (100 - (A + B)) / 2,
+      Y = [A + C, B + C],
+      Y
+  end.
 
 % Gets a value from the nipol at a random index.
 random(L) ->
