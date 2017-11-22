@@ -5,6 +5,6 @@
 ]).
 
 synthnn() ->
-  Test = bipol:set(30, 70),
-  io:format("~p\n", [bipol:get(0, Test)]),
+  Test = bipol:set(30, 71),
+  io:format("~p\n", [bipol:get(1, Test)]),
   io:fwrite("test\n").
