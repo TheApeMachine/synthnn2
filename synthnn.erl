@@ -10,5 +10,4 @@ synthnn() ->
   Test3 = bipol:random(Test2),
   Test4 = bipol:brandom(),
 
-  io:format("~p\n", [Test4]),
-  io:fwrite("test\n").
+  io:format("~p\n", [bipol:val(Test2)]).

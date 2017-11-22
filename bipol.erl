@@ -27,19 +27,14 @@ val(L) ->
   A = get(0, L),
   B = get(1, L),
 
-  case A > B of
-    true  -> true;
-    false -> false
-  end.
+  A > B.
 
 % Normalizes a bipol to add up to 100.
 normalize(L) ->
   A = get(0, L),
   B = get(1, L),
   C = (100 - (A + B)) / 2,
-  D = A + C,
-  E = B + C,
-  Y = [D, E],
+  Y = [A + C, B + C],
   Y.
 
 % Gets a value from the nipol at a random index.
