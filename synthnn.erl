@@ -5,6 +5,10 @@
 ]).
 
 synthnn() ->
-  Test = bipol:set(30, 71),
-  io:format("~p\n", [bipol:get(1, Test)]),
+  Test1 = bipol:set(50, 10),
+  Test2 = bipol:normalize(Test1),
+  Test3 = bipol:random(Test2),
+  Test4 = bipol:brandom(),
+
+  io:format("~p\n", [Test4]),
   io:fwrite("test\n").
