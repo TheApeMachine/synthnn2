@@ -22,12 +22,16 @@ set(A, B) ->
 get(I, L) ->
   lists:nth(I + 1, L).
 
-% Get the boolean value of a bipol.
+% Get the boolean value of a bipol. If the bipol is in a balanced state, a random boolean value
+% will be returned.
 val(L) ->
   A = get(0, L),
   B = get(1, L),
 
-  A > B.
+  case A =:= B of
+    true  -> lists:nth(rand:uniform(2), [true, false]);
+    false -> A > B
+  end.
 
 % Normalizes a bipol to add up to 100.
 normalize(L) ->
