@@ -29,7 +29,7 @@ val(L) ->
   B = get(1, L),
 
   case A =:= B of
-    true  -> lists:nth(rand:uniform(2), [true, false]);
+    true  -> brandom();
     false -> A > B
   end.
 
