@@ -1,17 +1,17 @@
 -module(synthnn).
 
 -export([
-  new/0,
-  read/2
+  new/1,
+  build/2
 ]).
 
-new() ->
+new(N) ->
   io:fwrite("START\n"),
-  read("This is great!", 1).
+  build(N, []).
 
-read([], _) ->
-  io:fwrite("\n");
+build(0, S) ->
+  S;
 
-read([H|T], _) ->
-  io:fwrite("~s-~p-", [[H], [neuron:process(H)]]),
-  read(T, 1).
+build(N, S) ->
+  T = S ++ [neuron:new()],
+  build(N - 1, T).

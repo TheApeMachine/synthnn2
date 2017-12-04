@@ -1,12 +1,12 @@
 -module(neuron).
 
 -export([
-  new/1,
+  new/0,
   process/2
 ]).
 
 % Generate a new structure of values for a neuron.
-new(T) ->
+new() ->
   [
     rand:uniform(),
     rand:uniform(),
