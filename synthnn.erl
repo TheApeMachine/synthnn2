@@ -1,13 +1,17 @@
 -module(synthnn).
 
 -export([
-  synthnn/0
+  new/0,
+  read/2
 ]).
 
-synthnn() ->
-  Test1 = bipol:set(50, 50),
-  Test2 = bipol:normalize(Test1),
-  Test3 = bipol:random(Test2),
-  Test4 = bipol:brandom(),
+new() ->
+  io:fwrite("START\n"),
+  read("This is great!", 1).
 
-  io:format("~p\n", [Test2]).
+read([], _) ->
+  io:fwrite("\n");
+
+read([H|T], _) ->
+  io:fwrite("~s-~p-", [[H], [neuron:process(H)]]),
+  read(T, 1).

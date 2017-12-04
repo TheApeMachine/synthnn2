@@ -11,19 +11,18 @@
 
 % Set the values of a new bipol.
 set(A, B) ->
-  if A + B > 100 ->
-    throw(bipol_overflow);
-  true ->
-    Ret = [A, B],
-    Ret
+  case A + B > 100 of
+    true  -> throw(bipol_overflow);
+    false ->
+      [A, B]
   end.
 
 % Get the value at the index of the bipol.
 get(I, L) ->
   lists:nth(I + 1, L).
 
-% Get the boolean value of a bipol. If the bipol is in a balanced state, a random boolean value
-% will be returned.
+% Get the boolean value of a bipol. If the bipol is in a balanced state,
+% a random boolean value will be returned.
 val(L) ->
   A = get(0, L),
   B = get(1, L),
@@ -42,8 +41,7 @@ normalize(L) ->
     true  -> throw(bipol_already_normalized);
     false ->
       C = (100 - (A + B)) / 2,
-      Y = [A + C, B + C],
-      Y
+      [A + C, B + C]
   end.
 
 % Gets a value from the nipol at a random index.
