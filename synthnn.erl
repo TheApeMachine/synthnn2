@@ -6,7 +6,6 @@
 ]).
 
 new(N) ->
-  io:fwrite("START\n"),
   build(N, []).
 
 build(0, S) ->

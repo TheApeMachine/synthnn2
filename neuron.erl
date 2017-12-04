@@ -6,6 +6,13 @@
 ]).
 
 % Generate a new structure of values for a neuron.
+% By position in the list the values are defined as follows:
+%
+% A: Amplitude
+% F: Frequency
+% P: Phase
+% V: Value (current)
+% B: Bipol (as boolean)
 new() ->
   [
     rand:uniform(),
@@ -16,6 +23,7 @@ new() ->
   ].
 
 % Run the sine wave function for this neuron and return its value.
+% Returns as a complete neuron structure.
 process(N, T) ->
   [
     lists:nth(1, N),
