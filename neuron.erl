@@ -10,11 +10,19 @@ new() ->
   [
     rand:uniform(),
     rand:uniform(),
-    rand:uniform()
+    rand:uniform(),
+    rand:uniform(),
+    bipol:brandom()
   ].
 
 % Run the sine wave function for this neuron and return its value.
 process(N, T) ->
-  lists:nth(1, N) * math:sin(
-    2 * math:pi() * lists:nth(2, N) * T
-  ) + lists:nth(3, N).
+  [
+    lists:nth(1, N),
+    lists:nth(2, N),
+    lists:nth(3, N),
+    lists:nth(1, N) * math:sin(
+      2 * math:pi() * lists:nth(2, N) * T
+    ) + lists:nth(3, N),
+    lists:nth(5, N)
+  ].

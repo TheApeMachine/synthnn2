@@ -44,7 +44,7 @@ normalize(L) ->
       [A + C, B + C]
   end.
 
-% Gets a value from the nipol at a random index.
+% Gets a value from the bipol at a random index.
 random(L) ->
   get(rand:uniform(2) - 1, L).
 
