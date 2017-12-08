@@ -24,6 +24,8 @@ new() ->
 
 % Run the sine wave function for this neuron and return its value.
 % Returns as a complete neuron structure.
+%
+% A * sin(2 * pi * F * T) + P
 process(N, T) ->
   [
     lists:nth(1, N),

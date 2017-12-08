@@ -10,6 +10,14 @@
 % the main loop.
 main() ->
   S = synthnn:new(2),
+
+  inets:start(),
+  {ok, {{Version, 200, ReasonPhrase}, Headers, Body}} = httpc:request("http://www.erlang.org"),
+
+  B = re:replace(Body, "<\s*script\s*>|<\s*\/\s*script\s*>", "", [global, {return, list}]),
+  A = re:replace(B, "<\/?[^>]*>|\n|\t", "", [global, {return, list}]),
+
+  io:fwrite("~p", [string:strip(A)]),
   loop(0, S).
 
 % Main loop to run the network in real-time, and generate a time (T) tick for
@@ -19,7 +27,7 @@ loop(100, S) ->
 
 loop(T, S) ->
   X = process(S, T, []),
-  io:fwrite("~w\n", [X]),
+  % io:fwrite("~w\n", [X]),
   loop(T + 1, X).
 
 process([], Tx, L) ->
