@@ -3,27 +3,22 @@
 -export([
   main/0,
   loop/2,
-  process/3
+  process/3,
+  readlines/1,
+  get_all_lines/1
 ]).
 
 % Build a new network, passing in the amount of available senses, and start
 % the main loop.
 main() ->
   S = synthnn:new(2),
-
-  inets:start(),
-  {ok, {{Version, 200, ReasonPhrase}, Headers, Body}} = httpc:request("http://www.erlang.org"),
-
-  B = re:replace(Body, "<\s*script\s*>|<\s*\/\s*script\s*>", "", [global, {return, list}]),
-  A = re:replace(B, "<\/?[^>]*>|\n|\t", "", [global, {return, list}]),
-
-  io:fwrite("~p", [string:strip(A)]),
-  loop(0, S).
+  L = readlines("/home/theapemachine/data/stories/1.txt"),
+  process(L, S, []).
 
 % Main loop to run the network in real-time, and generate a time (T) tick for
 % the neuron sine waves.
 loop(100, S) ->
-  S;
+  Z = re:replace(io:get_line(">"), "\n|\r", "", [global, {return, list}]);
 
 loop(T, S) ->
   X = process(S, T, []),
@@ -36,3 +31,15 @@ process([], Tx, L) ->
 process([H|T], Tx, L) ->
   X = L ++ [neuron:process(H, Tx)],
   process(T, Tx, X).
+
+readlines(FileName) ->
+  {ok, Device} = file:open(FileName, [read]),
+  try get_all_lines(Device)
+    after file:close(Device)
+  end.
+
+get_all_lines(Device) ->
+  case io:get_line(Device, "") of
+    eof  -> [];
+    Line -> Line ++ get_all_lines(Device)
+  end.
